@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import * as slugify from "slugify";
+import slugify from "slugify";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
 export default {
   components: {
@@ -113,6 +113,7 @@ export default {
         link.download = filename + ".png";
         link.href = qrCode.toDataURL();
         link.click();
+        console.log(link);
       }
     },
   },
