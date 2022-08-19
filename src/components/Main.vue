@@ -57,13 +57,20 @@
 
     <div
       class="max-w-5xl m-auto flex flex-col text-center align-center justify-center"
-      :class="{ 'my-20': qrcodeReady }"
+      :class="{ 'my-20': form.url }"
     >
-      <div ref="qrcode" class="flex items-center justify-center mx-auto"></div>
+      <div ref="qrcode">
+        <vue-qrcode
+          v-if="form.url"
+          :value="form.url"
+          :options="{ width: form.size }"
+          class="flex items-center justify-center mx-auto"
+        ></vue-qrcode>
+      </div>
 
       <button
         @click.prevent="download"
-        v-if="qrcodeReady"
+        v-if="form.url"
         class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded w-1/3 m-auto my-5"
       >
         Download
@@ -74,8 +81,11 @@
 
 <script>
 import * as slugify from "slugify";
-import * as QRCode from "easyqrcodejs";
+import VueQrcode from "@chenfengyuan/vue-qrcode";
 export default {
+  components: {
+    VueQrcode,
+  },
   data() {
     return {
       form: {
@@ -87,23 +97,6 @@ export default {
   },
 
   methods: {
-    handleFormSubmit() {
-      const firstQrCode = this.$refs.qrcode.firstChild;
-      if (firstQrCode) {
-        firstQrCode.remove();
-      }
-      this.qrcodeReady = true;
-      // Options
-      const options = {
-        text: this.form.url,
-        width: Number(this.form.size),
-        height: Number(this.form.size),
-      };
-
-      // Create new QRCode Object
-      new QRCode(this.$refs.qrcode, options);
-    },
-
     download() {
       const filename = slugify(this.form.url.replace(/(^\w+:|^)\/\//, ""));
       const qrCode = this.$refs.qrcode.firstChild;
