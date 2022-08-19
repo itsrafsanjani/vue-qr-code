@@ -60,11 +60,20 @@
       :class="{ 'my-20': qrcodeReady }"
     >
       <div ref="qrcode" class="flex items-center justify-center mx-auto"></div>
+
+      <button
+        @click.prevent="download"
+        v-if="qrcodeReady"
+        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded w-1/3 m-auto my-5"
+      >
+        Download
+      </button>
     </div>
   </main>
 </template>
 
 <script>
+import * as slugify from "slugify";
 import * as QRCode from "easyqrcodejs";
 export default {
   data() {
@@ -79,6 +88,10 @@ export default {
 
   methods: {
     handleFormSubmit() {
+      const firstQrCode = this.$refs.qrcode.firstChild;
+      if (firstQrCode) {
+        firstQrCode.remove();
+      }
       this.qrcodeReady = true;
       // Options
       const options = {
@@ -89,6 +102,17 @@ export default {
 
       // Create new QRCode Object
       new QRCode(this.$refs.qrcode, options);
+    },
+
+    download() {
+      const filename = slugify(this.form.url.replace(/(^\w+:|^)\/\//, ""));
+      const qrCode = this.$refs.qrcode.firstChild;
+      if (qrCode) {
+        const link = document.createElement("a");
+        link.download = filename + ".png";
+        link.href = qrCode.toDataURL();
+        link.click();
+      }
     },
   },
 };
