@@ -56,6 +56,7 @@
     </div>
 
     <div
+      id="qrcode"
       class="max-w-5xl m-auto flex flex-col text-center align-center justify-center"
       :class="{ 'my-20': form.url }"
     >
@@ -97,6 +98,13 @@ export default {
   },
 
   methods: {
+    handleFormSubmit() {
+      const qrcode = document.getElementById("qrcode");
+      if (qrcode) {
+        qrcode.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+
     download() {
       const filename = slugify(this.form.url.replace(/(^\w+:|^)\/\//, ""));
       const qrCode = this.$refs.qrcode.firstChild;
