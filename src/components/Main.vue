@@ -6,20 +6,20 @@
       <div class="w-full md:w-2/3 mr-24">
         <h1 class="text-3xl font-bold mb-5 md:text-4xl">QR Code Generator</h1>
         <p class="mb-4">
-          QR Codes allow smartphone users to access your website simply and
-          quickly.
+          QR Codes allow smartphone users to access your website link, mobile number or any type
+          of code simply and quickly without typing them!
         </p>
         <p>
-          Enter your URL below to generate a QR Code and download the image.
+          Enter any link, number or text below to generate a QR Code and download the image.
         </p>
 
         <form @submit.prevent="handleFormSubmit" class="mt-4">
           <input
-            v-model="form.url"
-            id="url"
-            name="url"
-            type="url"
-            placeholder="Enter a URL"
+            v-model="form.text"
+            id="text"
+            name="text"
+            type="text"
+            placeholder="Enter anything"
             class="w-full border-2 border-gray-200 rounded py-2 px-3 text-grey-dark mr-2 focus:outline-blue-500 mb-5"
             required
           />
@@ -58,12 +58,12 @@
     <div
       id="qrcode"
       class="max-w-5xl m-auto flex flex-col text-center align-center justify-center"
-      :class="{ 'my-20': form.url }"
+      :class="{ 'my-20': form.text }"
     >
       <div ref="qrcode">
         <vue-qrcode
-          v-if="form.url"
-          :value="form.url"
+          v-if="form.text"
+          :value="form.text"
           :options="{ width: form.size }"
           class="flex items-center justify-center mx-auto"
         ></vue-qrcode>
@@ -71,7 +71,7 @@
 
       <button
         @click.prevent="download"
-        v-if="form.url"
+        v-if="form.text"
         class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded w-1/3 m-auto my-5"
       >
         Download
@@ -90,7 +90,7 @@ export default {
   data() {
     return {
       form: {
-        url: "",
+        text: "",
         size: "300",
       },
       qrcodeReady: false,
@@ -106,7 +106,7 @@ export default {
     },
 
     download() {
-      const filename = slugify(this.form.url.replace(/(^\w+:|^)\/\//, ""));
+      const filename = slugify(this.form.text.replace(/(^\w+:|^)\/\//, ""));
       const qrCode = this.$refs.qrcode.firstChild;
       if (qrCode) {
         const link = document.createElement("a");
