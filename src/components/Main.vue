@@ -56,9 +56,10 @@
     </div>
 
     <div
-      class="max-w-5xl m-auto flex flex-col text-center align-center justify-center mt-20"
+      class="max-w-5xl m-auto flex flex-col text-center align-center justify-center"
+      :class="{ 'my-20': qrcodeReady }"
     >
-      <div class="flex items-center justify-center" ref="qrcode"></div>
+      <div ref="qrcode" class="flex items-center justify-center mx-auto"></div>
     </div>
   </main>
 </template>
@@ -72,22 +73,22 @@ export default {
         url: "",
         size: "300",
       },
+      qrcodeReady: false,
     };
-  },
-
-  mounted() {
-    // Options
-    var options = {
-      text: "https://github.com/itsrafsanjani",
-    };
-
-    // Create new QRCode Object
-    new QRCode(this.$refs.qrcode, options);
   },
 
   methods: {
     handleFormSubmit() {
-      console.log(this.form);
+      this.qrcodeReady = true;
+      // Options
+      const options = {
+        text: this.form.url,
+        width: Number(this.form.size),
+        height: Number(this.form.size),
+      };
+
+      // Create new QRCode Object
+      new QRCode(this.$refs.qrcode, options);
     },
   },
 };
