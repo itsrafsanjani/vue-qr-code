@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^2.0.0",
-    "easyqrcodejs": "^4.4.12",
     "qrcode": "^1.5.1",
     "slugify": "^1.6.5",
     "vue": "^3.2.37"
