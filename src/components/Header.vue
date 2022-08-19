@@ -1,7 +1,7 @@
 <template>
   <header class="p-4 mb-10 bg-blue-500">
     <div class="max-w-5xl m-auto">
-      <div class="text-xl font-bold text-white text-center md:text-left">QR Code Generator</div>
+      <a href="/" class="text-xl font-bold text-white text-center md:text-left">QR Code Generator</a>
     </div>
   </header>
 </template>
