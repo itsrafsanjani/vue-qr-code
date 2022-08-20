@@ -6,16 +6,17 @@
       <div class="w-full md:w-2/3 mr-24">
         <h1 class="text-3xl font-bold mb-5 md:text-4xl">QR Code Generator</h1>
         <p class="mb-4">
-          QR Codes allow smartphone users to access your website link, mobile number or any type
-          of code simply and quickly without typing them!
+          QR Codes allow smartphone users to access your website link, mobile
+          number or any type of code simply and quickly without typing them!
         </p>
         <p>
-          Enter any link, number or text below to generate a QR Code and download the image.
+          Enter any link, number or text below to generate a QR Code and
+          download the image.
         </p>
 
         <form @submit.prevent="handleFormSubmit" class="mt-4">
           <input
-            v-model="form.text"
+            v-model.trim="form.text"
             id="text"
             name="text"
             type="text"
@@ -39,7 +40,8 @@
             <option value="700">700x700</option>
           </select>
           <button
-            class="bg-blue-500 hover:bg-blue-600 transition duration-150 ease-in-out rounded w-full text-white py-3 px-4 mt-5"
+            :disabled="!form.text"
+            class="bg-blue-500 hover:bg-blue-600 transition duration-150 ease-in-out rounded w-full text-white py-3 px-4 mt-5 disabled:bg-blue-300 disabled:cursor-not-allowed"
             type="submit"
           >
             Generate QR Code
@@ -66,7 +68,7 @@
           :value="form.text"
           :options="{ width: form.size }"
           class="flex items-center justify-center mx-auto"
-          style="height: 100%; width: 100%;"
+          style="height: 100%; width: 100%"
         ></vue-qrcode>
       </div>
 
@@ -100,6 +102,7 @@ export default {
 
   methods: {
     handleFormSubmit() {
+      console.log(this.form);
       const qrcode = document.getElementById("qrcode");
       if (qrcode) {
         qrcode.scrollIntoView({ behavior: "smooth" });
