@@ -114,7 +114,6 @@ export default {
         link.download = filename + ".png";
         link.href = qrCode.toDataURL();
         link.click();
-        console.log(link);
       }
     },
   },
