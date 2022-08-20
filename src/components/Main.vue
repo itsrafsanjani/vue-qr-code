@@ -21,7 +21,7 @@
             name="text"
             type="text"
             placeholder="Enter anything"
-            class="w-full border-2 border-gray-200 rounded py-2 px-3 text-grey-dark mr-2 focus:outline-blue-500 mb-5"
+            class="w-full border-2 border-gray-200 rounded py-2 px-3 text-grey-dark mr-2 focus:outline-blue-500 mb-5 dark:bg-slate-900"
             required
           />
 
@@ -29,7 +29,7 @@
             v-model="form.size"
             id="size"
             name="size"
-            class="w-full border-2 border-gray-200 rounded py-2 px-3 text-grey-dark mr-2 focus:outline-blue-500"
+            class="w-full border-2 border-gray-200 rounded py-2 px-3 text-grey-dark mr-2 focus:outline-blue-500 dark:bg-slate-900"
           >
             <option value="100">100x100</option>
             <option value="200">200x200</option>
@@ -41,7 +41,7 @@
           </select>
           <button
             :disabled="!form.text"
-            class="bg-blue-500 hover:bg-blue-600 transition duration-150 ease-in-out rounded w-full text-white py-3 px-4 mt-5 disabled:bg-blue-300 disabled:cursor-not-allowed"
+            class="bg-blue-500 hover:bg-blue-600 transition duration-150 ease-in-out rounded w-full text-white py-3 px-4 mt-5 disabled:bg-blue-300 disabled:cursor-not-allowed dark:disabled:text-slate-500"
             type="submit"
           >
             Generate QR Code
@@ -60,15 +60,17 @@
     <div
       id="qrcode"
       class="max-w-5xl m-auto flex flex-col text-center align-center justify-center"
-      :class="{ 'my-20': form.text }"
+      :class="{ 'py-10': form.text }"
     >
       <div ref="qrcode">
         <vue-qrcode
           v-if="form.text"
           :value="form.text"
-          :options="{ width: form.size }"
+          :options="{
+            width: form.size,
+          }"
           class="flex items-center justify-center mx-auto"
-          style="height: 100%; width: 100%"
+          style="max-height: 100%; max-width: 100%"
         ></vue-qrcode>
       </div>
 
@@ -102,7 +104,6 @@ export default {
 
   methods: {
     handleFormSubmit() {
-      console.log(this.form);
       const qrcode = document.getElementById("qrcode");
       if (qrcode) {
         qrcode.scrollIntoView({ behavior: "smooth" });

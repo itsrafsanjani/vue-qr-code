@@ -4,8 +4,10 @@ import Main from "./components/Main.vue";
 </script>
 
 <template>
-  <Header />
-  <Main />
+  <div class="bg-white dark:bg-slate-900 dark:text-white min-h-screen">
+    <Header />
+    <Main />
+  </div>
 </template>
 
 <style scoped></style>
