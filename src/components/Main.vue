@@ -66,6 +66,7 @@
           :value="form.text"
           :options="{ width: form.size }"
           class="flex items-center justify-center mx-auto"
+          style="height: 100%; width: 100%;"
         ></vue-qrcode>
       </div>
 
