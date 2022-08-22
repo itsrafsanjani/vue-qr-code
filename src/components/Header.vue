@@ -6,8 +6,12 @@
           QR Code Generator
         </h1>
       </a>
-      <t-dropdown text="Color Mode">
-        <div slot-scope="{ hide, blurHandler }" class="rounded overflow-hidden">
+      <div>
+        <button type="button" @click="toggleDropdown" class="text-white bg-blue-600 px-3 py-2 rounded hover:bg-blue-700 transition-all">Color Mode</button>
+        <div
+          v-if="dropdownShown"
+          class="absolute right-0 mr-2 mt-3 rounded overflow-hidden"
+        >
           <button
             class="bg-white dark:bg-slate-900 dark:text-white border-0 block w-full px-10 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
             role="menuitem"
@@ -23,23 +27,28 @@
             Dark
           </button>
         </div>
-      </t-dropdown>
+      </div>
     </div>
   </header>
 </template>
 
 <script>
-import { TDropdown } from "@variantjs/vue";
 export default {
-  components: {
-    TDropdown,
-  },
   created() {
     this.setThemeToLocalStorage();
     this.setDefaultTheme();
   },
 
+  data() {
+    return {
+      dropdownShown: false,
+    };
+  },
+
   methods: {
+    toggleDropdown() {
+      this.dropdownShown = !this.dropdownShown;
+    },
     setDefaultTheme() {
       document.documentElement.classList.add(localStorage.theme);
     },
@@ -60,6 +69,7 @@ export default {
         document.documentElement.classList.remove("dark");
         this.setThemeToLocalStorage("light");
       }
+      this.dropdownShown = false;
     },
   },
 };
