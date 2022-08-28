@@ -8,16 +8,16 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [
     vue(),
-    VitePWA({ 
+    VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
         enabled: true
       },
       injectRegister: 'auto',
       manifest: {
-        name: 'My Awesome App',
-        short_name: 'MyApp',
-        description: 'My Awesome App description',
+        name: 'VQR | Vue QR Code Generator',
+        short_name: 'VQR',
+        description: 'VQR is a free QR Code generator. Create a QR Code for your website link, phone number or any type of text!',
         theme_color: '#ffffff',
         icons: [
           {
