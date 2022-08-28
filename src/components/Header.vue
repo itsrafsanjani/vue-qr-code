@@ -7,7 +7,13 @@
         </h1>
       </a>
       <div>
-        <button type="button" @click="toggleDropdown" class="text-white bg-blue-600 px-3 py-2 rounded hover:bg-blue-700 transition-all">Color Mode</button>
+        <button
+          type="button"
+          @click="toggleDropdown"
+          class="text-white bg-blue-600 px-3 py-2 rounded hover:bg-blue-700 transition-all"
+        >
+          Color Mode
+        </button>
         <div
           v-if="dropdownShown"
           class="absolute right-0 mr-2 mt-3 rounded overflow-hidden"

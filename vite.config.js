@@ -479,5 +479,9 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  ssgOptions: {
+    mock: true,
+    format: 'cjs',
+  },
 })
