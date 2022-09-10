@@ -70,7 +70,7 @@
             width: form.size,
           }"
           class="flex items-center justify-center mx-auto"
-          style="max-height: 100%; max-width: 100%"
+          style="max-height: 100%; max-width: 100%; height: auto; width: auto;"
         ></vue-qrcode>
       </div>
 
